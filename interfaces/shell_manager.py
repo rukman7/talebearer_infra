@@ -11,7 +11,9 @@ class shellController(metaclass=DebugMetaClass):
         process = subprocess.Popen(command.split(" "), stdout =
             subprocess.PIPE, stderr = subprocess.PIPE)
         output, error = process.communicate()
-        logger.info('output = {}, error = {}'.format(output.decode('utf-8'), error.decode('utf-8')))
+        out = 'output = {}, error = {}'.format(output.decode('utf-8'), error.decode('utf-8'))
+        logger.console(out)
+        logger.info(out)
         if not ignore_errors:
             if len(error.decode('utf-8')) > 0:
                 raise
