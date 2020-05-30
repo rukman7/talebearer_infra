@@ -7,7 +7,7 @@ class shellController(metaclass=DebugMetaClass):
     def __init__(self):
         pass
 
-    def run_command(self, command, ignore_errors=False):
+    def run_command(self, command, ignore_errors=False, ret=False):
         process = subprocess.Popen(command.split(" "), stdout =
             subprocess.PIPE, stderr = subprocess.PIPE)
         output, error = process.communicate()
@@ -17,4 +17,6 @@ class shellController(metaclass=DebugMetaClass):
         if not ignore_errors:
             if len(error.decode('utf-8')) > 0:
                 raise
+        if ret:
+            return out
 
